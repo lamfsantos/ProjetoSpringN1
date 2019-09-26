@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">  
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport"content="width=device-width"/>
+	<title>Primeiro Teste</title>
+	
+	<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet" />
+	
+</head>
+<body>
+	<div  class="card" style="margin: 10px">
+		<div class="card-header">
+			<h1 class="card-title">Edita Item</h1>
+		</div>
+		<div class="card-body">
+			<form class="form-inline" method="POST" th:object="${itemModel}" th:action="@{/itens}" style="margin: 20px 0"> 
+				<div class="form-group">
+					<input type="hidden" th:field="*{id}"/>
+					<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"/>
+					<input type="text" class="form-control" placeholder="Quantidade" th:field="*{quantidade}"/>
+					<input type="text" class="form-control" placeholder="Valor" th:field="*{valor}"/>
+					<button type="submit" class="btn btn-primary">
+						Salvar
+					</button>
+				</div>
+			</form>
+		
+		</div>
+	</div>
+</body>
+</html>

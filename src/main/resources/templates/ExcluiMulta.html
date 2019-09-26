@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">  
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport"content="width=device-width"/>
+	<title>Primeiro Teste</title>
+	
+	<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet" />
+	
+</head>
+<body>
+	<div  class="card" style="margin: 10px">
+		<div class="card-header">
+			<h1 class="card-title">Excluir Multa</h1>
+		</div>
+		<div class="card-body">
+			<form class="form-inline" method="POST" th:object="${multaModel}" 
+				th:action="@{/exMulta/{id} (id=${multaModel.id})}" style="margin: 20px 0"> 
+				<div class="form-group">
+					<div class="card-title">
+						Deseja realmente excluir ?
+					</div>
+					<button type="submit" class="btn btn-primary">
+						Sim
+					</button>
+					<a th:href="@{/multas}">
+					<button type="button" class="btn btn-danger">
+						Não
+					</button>
+					</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

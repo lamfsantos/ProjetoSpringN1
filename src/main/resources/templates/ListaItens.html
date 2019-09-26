@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">  
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport"content="width=device-width"/>
+	<title>Primeiro Teste</title>
+	
+	<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet" />
+	
+</head>
+<body>
+	<div  class="card" style="margin: 10px">
+		<div class="card-header">
+			<h1 class="card-title">Lista de Itens</h1>
+		</div>
+		<div class="card-body">
+			<form class="form-inline" method="POST" th:object="${itemModel}" th:action="@{/itens}" style="margin: 20px 0"> 
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"/>
+					<input type="text" class="form-control" placeholder="Quantidade" th:field="*{quantidade}"/>
+					<input type="text" class="form-control" placeholder="Valor" th:field="*{valor}"/>
+					<button type="submit" class="btn btn-primary">
+						Salvar
+					</button>
+				</div>
+			</form>
+		
+			<table class="table"> 
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nome</th>
+						<th>Quantidade</th>
+						<th>Valor</th>
+						<th>Editar</th>
+						<th>Excluir</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="item:${itens}">
+						<td th:text="${item.id}"/>
+						<td th:text="${item.nome}"/>
+						<td th:text="${item.quantidade}"/>
+						<td th:text="'R$ ' + ${item.valor}"/>
+						<td> <a class="btn btn-primary" th:href="@{/edItem/{id} (id=${item.id})}">Editar</a></td>
+						<td> <a class="btn btn-danger" th:href="@{/exItem/{id} (id=${item.id})}">Excluir</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
