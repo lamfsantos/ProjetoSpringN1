@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport"content="width=device-width"/>
-	<title>Primeiro Teste</title>
-	
-	<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet" />
-	
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Primeiro Teste</title>
+
+<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+	rel="stylesheet" />
+
 </head>
 <body>
 	<div th:insert="~{Menu :: menu}"></div>
-	<div  class="card" style="margin: 10px">
+	<div class="card" style="margin: 10px">
 		<div class="card-header">
 			<h1 class="card-title">
-				Lista de Carros
-				<a th:href="@{/logout}">Logout [<span sec:authentication="name"></span>]</a>
+				Lista de Carros <a th:href="@{/logout}">Logout [<span
+					sec:authentication="name"></span>]
+				</a>
 			</h1>
 		</div>
 		<div class="card-body">
-			<form class="form-inline" method="POST" th:object="${carroModel}" th:action="@{/carros}" style="margin: 20px 0"> 
+			<form class="form-inline" method="POST" th:object="${carroModel}"
+				th:action="@{/carros}" style="margin: 20px 0">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Placa" th:field="*{placa}"/>
-					<button type="submit" class="btn btn-primary">
-						Salvar
-					</button>
+					<input type="text" class="form-control" placeholder="Placa"
+						th:field="*{placa}" />
+					<button type="submit" class="btn btn-primary">Salvar</button>
 				</div>
 			</form>
 			<table class="table">
@@ -35,14 +37,19 @@
 						<th>Placa</th>
 						<th>Editar</th>
 						<th>Excluir</th>
+						<th>Multas</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="carro:${carros}">
-						<td th:text="${carro.id}"/>
-						<td th:text="${carro.placa}"/>
-						<td> <a class="btn btn-primary" th:href="@{/edCarro/{id} (id=${carro.id})}">Editar</a></td>
-						<td> <a class="btn btn-warning" th:href="@{/exxCarro/{id} (id=${carro.id})}">Excluir</a></td>
+						<td th:text="${carro.id}" />
+						<td th:text="${carro.placa}" />
+						<td><a class="btn btn-primary"
+							th:href="@{/edCarro/{id} (id=${carro.id})}">Editar</a></td>
+						<td><a class="btn btn-warning"
+							th:href="@{/exxCarro/{id} (id=${carro.id})}">Excluir</a></td>
+						<td><a class="btn btn-success" 
+							th:href="@{/verCarro/{id} (id=${carro.id})}"> Verificar </a></td>
 					</tr>
 				</tbody>
 			</table>

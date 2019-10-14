@@ -11,31 +11,31 @@ import br.edu.ifms.ProjetoN1.model.MultaModel;
 import br.edu.ifms.ProjetoN1.service.InfracaoService;
 import br.edu.ifms.ProjetoN1.service.MultaService;
 
-@Controller 
+@Controller
 public class MultaController {
-	
-	@Autowired 
+
+	@Autowired
 	private MultaService multaService;
-	
-	@Autowired 
+
+	@Autowired
 	private InfracaoService infracaoService;
-	
+
 	@GetMapping("/multas")
 	public ModelAndView listaMultas() {
 		ModelAndView mv = new ModelAndView("ListaMultas");
 		mv.addObject("infracoes", infracaoService.buscarTodos());
 		mv.addObject("multas", multaService.buscarTodos());
 		mv.addObject(new MultaModel());
-		
+
 		return mv;
 	}
-	
+
 	@PostMapping("/multas")
 	public String salvar(MultaModel multa) {
 		multaService.salvar(multa);
 		return "redirect:/multas";
 	}
-	
+
 	@GetMapping("/edMulta/{id}")
 	public ModelAndView editar(@PathVariable("id") long id) {
 		ModelAndView modelAndView = new ModelAndView("EditaMulta");
@@ -44,16 +44,16 @@ public class MultaController {
 		modelAndView.addObject("multas", multaService.buscarTodos());
 		return modelAndView;
 	}
-	
+
 	@GetMapping("/exMulta/{id}")
-	public ModelAndView excluir(@PathVariable("id") long id){
+	public ModelAndView excluir(@PathVariable("id") long id) {
 		ModelAndView modelAndView = new ModelAndView("ExcluiMulta");
 		modelAndView.addObject(multaService.procurar(id));
 		return modelAndView;
 	}
-	
+
 	@PostMapping("/exMulta/{id}")
-	public String excluirDireto(@PathVariable("id") long id){
+	public String excluirDireto(@PathVariable("id") long id) {
 		multaService.excluir(id);
 		return "redirect:/multas";
 	}
