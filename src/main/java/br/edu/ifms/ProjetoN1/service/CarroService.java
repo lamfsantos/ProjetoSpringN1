@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifms.ProjetoN1.repository.CarroRepository;
 import br.edu.ifms.ProjetoN1.model.CarroModel;
+import br.edu.ifms.ProjetoN1.model.MultaModel;
 
 @Service
 public class CarroService {
@@ -28,5 +29,25 @@ public class CarroService {
 	
 	public void excluir(long id) {
 		carros.deleteById(id);
+	}
+	
+	public int calculaTotalPontos(CarroModel carro) {
+		int pontos = 0;
+		
+		for(MultaModel multa : carro.getMultas()) {
+			pontos += multa.getInfracao().getPontos();
+		}
+		
+		return pontos;
+	}
+	
+	public double calculaValorTotal(CarroModel carro) {
+		double valor = 0;
+		
+		for(MultaModel multa : carro.getMultas()) {
+			valor += multa.getInfracao().getValor();
+		}
+		
+		return valor;
 	}
 }

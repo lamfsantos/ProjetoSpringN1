@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.ifms.ProjetoN1.model.CarroModel;
-import br.edu.ifms.ProjetoN1.model.MultaModel;
 import br.edu.ifms.ProjetoN1.service.CarroService;
 
 @Controller 
@@ -68,28 +67,8 @@ public class CarroController {
 	public ModelAndView verificarCarro(@PathVariable("id") Long id) {
 		ModelAndView mv = new ModelAndView("VerificarCarro");
 		mv.addObject("carro", carroService.procurar(id));
-		mv.addObject("totalPontos", calculaTotalPontos(carroService.procurar(id)));
-		mv.addObject("valorTotal", calculaValorTotal(carroService.procurar(id)));
+		mv.addObject("totalPontos", carroService.calculaTotalPontos(carroService.procurar(id)));
+		mv.addObject("valorTotal", carroService.calculaValorTotal(carroService.procurar(id)));
 		return mv;
-	}
-	
-	public int calculaTotalPontos(CarroModel carro) {
-		int pontos = 0;
-		
-		for(MultaModel multa : carro.getMultas()) {
-			pontos += multa.getInfracao().getPontos();
-		}
-		
-		return pontos;
-	}
-	
-	public double calculaValorTotal(CarroModel carro) {
-		double valor = 0;
-		
-		for(MultaModel multa : carro.getMultas()) {
-			valor += multa.getInfracao().getValor();
-		}
-		
-		return valor;
 	}
 }
